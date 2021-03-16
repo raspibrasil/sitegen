@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+#
+# Publishes a page or blog post.
+#
+
+import sys
+
+from sitegen import publish
+
+def main():
+    pb = publish.Publisher()
+
+    # remove executable from argument list
+    sys.argv.reverse()
+    sys.argv.pop()
+    sys.argv.reverse()
+
+    for item in sys.argv:
+        print(item)
+        pb.publish(item)
+
+if __name__ == "__main__":
+    main()
+    sys.exit(0)

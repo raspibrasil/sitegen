@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+#
+# Init script to make a new site.
+# You can "nuke" an existing site by passing -f to it.
+#
+
+import os
+import sys
+
+from sitegen import directory
+
+dm  = directory.DirMaker()
+
+if len(sys.argv) == 2 and sys.argv[1] == "-f":
+    dm.init(force=True)
+else:
+    dm.init()
+
+sys.exit(0)
