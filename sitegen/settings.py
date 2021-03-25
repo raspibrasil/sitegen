@@ -5,13 +5,10 @@ import os
 # Should debug messages be printed to stdout?
 DEBUG = True
 
-# Absolute path to the template file.
-TEMPLATE = '/home/vman/Programs/web/sitegen/template.html'
-
 # -- Site structure -- #
 
 # Path to where the site should be published (put in production):
-PUBDIR = '/home/vman/Programs/web/sitegen/testsite/'
+PUBDIR = os.environ['HOME'] + '/Programs/web/sitegen/testsite/'
 
 # "Static" pages of the site (i.e. root pages)
 # Add them as tuples in the format of ("page title", "URL"):
@@ -26,4 +23,25 @@ SITE_PAGES = [
 BLOG_SUBDIR = 'blog/'
 BLOG = PUBDIR + BLOG_SUBDIR
 
-# -- /Site structure -- #
+
+# -- Page structure --
+#
+# This section contains enumerates the "holes" and other structures that our
+# site's template has.
+#
+# It might be necessary to turn it completely into a Python object later.
+#
+
+# Path to the template file
+TEMPLATE = os.environ['HOME'] + '/Programs/web/sitegen/template.html'
+
+# The fields (holes) for our page's template. 
+# Some are fields are 'reserved' i.e. please do not edit them.
+# After you edit these, DO NOT forget to edit the actual template accordingly.
+TEMPLATE_FIELDS = [
+    'title',        # reserved
+    'description',  # reserved
+    'content',      # reserved
+]
+
+# FIXME: this whole section needs it...
