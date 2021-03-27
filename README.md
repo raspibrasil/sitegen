@@ -70,7 +70,7 @@ TEMPLATE_FIELDS['navbar_top'] = '<ul><li><a href="/">Home</a></li></ul>'
 9. Deploy the website:
 
 ```
-scp -r mysupersite you@your_server:/var/www/
+scp -r mysupersite/* you@your_server:/var/www/
 ```
 
 And that's it!

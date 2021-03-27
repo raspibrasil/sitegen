@@ -29,7 +29,7 @@ SITE_PAGES = [
 # What's the name of the "blog" subfolder of the site?
 # This will be appended to PUBDIR
 BLOG_SUBDIR = 'blog/'
-BLOG = PUBDIR + BLOG_SUBDIR
+BLOG = PUBDIR + "/" + BLOG_SUBDIR
 
 
 # -- Page structure --

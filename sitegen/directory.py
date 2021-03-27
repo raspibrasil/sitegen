@@ -4,6 +4,7 @@ import os
 import sys
 from sitegen import settings
 from sitegen import publish
+from sitegen import blog
 
 '''
 This module contains the procedures for creating and managing the site's 
@@ -105,8 +106,11 @@ class DirMaker:
         os.mkdir(settings.BLOG)
         print("[INFO] Created %s subdirectory." % settings.BLOG_SUBDIR)
 
-        # TODO: do we create the tags directory now?
-
+        for page in blog.BLOG_PAGES:
+            os.mkdir(settings.BLOG + '/' + page[1])
+            print("[INFO] created blog page '%s'" % page[0])
+            # TODO: do we create the tags directory now?
+        
         print("[INFO] Creating site page directories...")
         # each 'page' is a tuple like: (title, url)
         for page in settings.SITE_PAGES:
@@ -150,9 +154,16 @@ The Sitegen Team
     def updatetemplate(self):
         '''
         Updates the template for the entire site without altering the content
-
-        TODO
         '''
+        pb = publish.Publisher()
+        for directory in os.walk(settings.PUBDIR):
+            if 'index.md' in directory[2]:
+                pb.publish(directory[0] + '/index.md')
+                print("[INFO] updated template in %s" % directory[0])
+            else:
+                print("[INFO] Nothing to do in %s." % directory[0])
+
+        os.chdir(settings.SITEROOT)
 
 
 class TagMaker:
