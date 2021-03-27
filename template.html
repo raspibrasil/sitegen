@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>%s</title>
+        <title>{title}</title>
         <meta http-equiv="Content-Type" value="text/html; charset=UTF-8" />
-        <meta name="description" content="%s" />
+        <meta name="description" content="{description}" />
+        <link rel="canonical" href="{canonical}" />
     </head>
     <body>
         <h1>Site example</h1>
         <section id="main">
-            %s
+            {content}
         </section>
+        <footer>
+            {footer_notice}
+        </footer>
     </body>
 </html>

@@ -20,11 +20,14 @@ class Publisher:
         self.article = article
         self.draft = draft
         self.startdir = os.path.realpath('.')
+
+        # Carry your own copy of the TEMPLATE_FIELDS variable
+        self.fields = settings.TEMPLATE_FIELDS
         try:
             with open(settings.TEMPLATE, 'r') as tmpl:
                 self.template_contents = tmpl.read()
         except FileNotFoundError:
-            print("[ERROR] Could not open template file '%s'" % TEMPLATE)
+            print("[ERROR] Could not open template file '%s'" % settings.TEMPLATE)
             print("Please correct its location in the settings")
             sys.exit(1)
 
@@ -50,6 +53,7 @@ class Publisher:
         except FileNotFoundError:
             pagetitle = raw_content.split('\n')[0][2:]
             print("[INFO] No title file given. Using your first line: %s" % pagetitle)
+        self.fields['title'] = pagetitle
 
         # Same for the meta description tag. If there's a file, read it:
         try:
@@ -57,6 +61,8 @@ class Publisher:
                 description = desc.read()
         except FileNotFoundError:
             description = pagetitle
+
+        self.fields['description'] = description
 
         # For categories, default to uncategorized:
         try:
@@ -79,6 +85,15 @@ class Publisher:
             with open('pubdate', 'w') as pd:
                 pd.write(pubdate)
 
+        # Obtaining the golden "canonical link:"
+        pathraw = page.split('/')
+        pathraw.reverse()
+        pathraw.pop() # get rid of the publish directory page 
+        pathraw.reverse()
+
+        path = "/".join(pathraw[:-1])
+        self.fields['canonical'] = settings.DOMAIN + path
+
         # Write to the template:
         if self.article:
             raw_content += '''
@@ -89,8 +104,10 @@ Filed under: ''' % pubdate
             for cat in categories:
                 raw_content += "[%s](/blog/tags/%s)" % (cat, cat)
 
-        content = markdown(raw_content)
-        final = self.template_contents % (description, pagetitle, content)
+        self.fields['content'] = markdown(raw_content)
+        
+        # This looks more organized!
+        final = self.template_contents.format(**self.fields)
         if settings.DEBUG:
             print("[DEBUG] Printing the contents of the page:")
             print(final)
