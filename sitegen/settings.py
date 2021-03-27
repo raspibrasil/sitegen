@@ -12,7 +12,8 @@ DEBUG = True
 SITEROOT = os.path.realpath('.')
 
 # Path to where the site should be published (put in production):
-PUBDIR = SITEROOT + '/testsite/'
+raw_pubdir = 'testsite'
+PUBDIR = SITEROOT + '/' + raw_pubdir
 
 # Your site's domain for linking, etc, with the https:// bit:
 DOMAIN = 'https://example.com/'
