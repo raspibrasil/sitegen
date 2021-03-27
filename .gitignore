@@ -2,3 +2,6 @@ __pycache__/
 testsite/
 *.pyc
 *.pyo
+
+# vim files
+*.swp
