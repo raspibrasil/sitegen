@@ -10,51 +10,67 @@ It can create a complete site from scratch, with an optional blog entry and full
 
 1. Clone this repository:
 
-    git clone https://github.com/raspibrasil/sitegen
+```
+git clone https://github.com/raspibrasil/sitegen
+```
 
 2. Install the markdown module (if not present):
 
-    pip install --user markdown
+```
+pip install --user markdown
+```
 
 3. Specify your site's domain and publication directory in `sitegen/settings.py`:
 
-    DOMAIN = 'https://mysupersite.net'
-    raw_pubdir = 'mysupersite'
+```
+DOMAIN = 'https://mysupersite.net'
+raw_pubdir = 'mysupersite'
+```
 
 4. Create your basic page structure in `sitegen/settings.py`:
 
-    SITE_PAGES = [
-        ('About this site', 'about'),
-        ('Get in touch', 'contact'),
-        ('Privacy Policy', 'privacy'),
-        ('My qualifications', 'resume'),
-    ]
+```
+SITE_PAGES = [
+    ('About this site', 'about'),
+    ('Get in touch', 'contact'),
+    ('Privacy Policy', 'privacy'),
+    ('My qualifications', 'resume'),
+]
+```
 
 5. Edit the template fields in `sitegen/settings.py`:
 
-    TEMPLATE_FIELDS = {
-        'title': "",        # reserved
-        'description': "",  # reserved
-        'canonical' : "",   # reserved
-        'content': "",      # reserved
-        'footer_notice': "Copyright 2021 - me - all rights reserved",
-        'navbar_top': "",
-    }
+```
+TEMPLATE_FIELDS = {
+    'title': "",        # reserved
+    'description': "",  # reserved
+    'canonical' : "",   # reserved
+    'content': "",      # reserved
+    'footer_notice': "Copyright 2021 - me - all rights reserved",
+    'navbar_top': "",
+}
 
-    TEMPLATE_FIELDS['navbar_top'] = '<ul><li><a href="/">Home</a></li></ul>'
+TEMPLATE_FIELDS['navbar_top'] = '<ul><li><a href="/">Home</a></li></ul>'
+```
 
 6. Edit the `template.html` file to taste.
 
 7. Create the site's structure in the publication directory:
 
-    ./init
+```
+./init
+```
 
 8. Edit the `index.md` files in each of the site pages with your content, and publish them:
 
-    ./publish mysupersite/index.md mysupersite/*/index.md
+```
+./publish mysupersite/index.md mysupersite/*/index.md
+```
 
 9. Deploy the website:
 
-    scp -r mysupersite you@your_server:/var/www/
+```
+scp -r mysupersite you@your_server:/var/www/
+```
 
 And that's it!
